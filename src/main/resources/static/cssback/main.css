@@ -1,0 +1,218 @@
+/* 폰트 추가 */
+@font-face {
+    font-family: 'MaplestoryOTFBold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFBold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* 초기 전체 설정 */
+* {
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration:none; 
+}
+
+ul {
+    list-style: none;
+}
+
+/* 최상 div */
+#container {
+    margin:0 auto;
+    width:1200px;
+    background-color: #fff;
+}
+
+/*해더, 내부 div 관련*/
+header{
+    width:100%;    
+    background-color:rgb(191, 219, 226);  /*설정 후 지우기*/
+}
+
+/* 내부 상위div */
+.head_Se1 {
+    margin: 50px auto;
+    width: 94%;
+    max-width: 1600px;
+    height: 30px;
+    position: relative;
+}
+
+/* 좌측 로고관련 */
+.top_logo {
+    text-align: left;
+    float: left;
+    
+}
+
+#top_LogoBtn{
+    font-family: 'MaplestoryOTFBold';
+    font-size: 40px;
+    border: 0;
+    background-color: rgba(0,0,0,0);
+}
+
+/* 중앙 검색관련 */
+.top_Search {
+    float: left;
+    margin-left: 40px;
+    margin-top: 5px;
+    width: 500px;
+    width: 500px;
+    background-color: transparent;
+    border: 1px solid #000000;
+    border-radius: 8px;
+}
+
+#inputTypeText {
+    margin: 2px;
+    width: 90%;
+    height: 40px;
+    position: relative;
+    padding: 20px;
+    border: 0;
+    font-size: 2rem;
+    font-weight: bold;
+    outline: none;
+    color: #000;
+    background-color: rgba(0,0,0,0);
+}
+
+#top_SearchBtn{
+    margin: 0 auto;
+    position: relative;
+    top: 2.5px;
+    right: 0;
+    border: 0;
+    background-color: rgba(0,0,0,0);
+
+}
+
+#searchIcon {
+    width: 30px;
+    height: 30px;
+}
+
+
+
+/* 우측 유저 로그인등 */
+#userJoin {
+    margin-top: 12.5px;
+    z-index: 10;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#userJoin a {
+    font-size: 15px;
+    line-height: 24px;
+    font-weight: 400;
+    color: #959595;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    margin: 0px 0px 0px 16px;
+}
+
+#loginOff {
+    display: block;
+}
+/* 해더, 내부 div 관련 끝 */
+
+/* nav */
+nav{
+    margin: 50px auto;
+    margin-top: 0px;
+    position: relative;
+    width: 90%;
+    height: 30px;
+}
+
+/* nav 좌측 카테고리 */
+.nav_Category {
+    text-align: left;
+    float: left;
+}
+
+#category_Btn{
+    width: 200px;
+    height: 50px;
+    border: 0px;
+    border-radius: 8px;
+    background-color: rgb(255, 255, 255, 0.0);
+}
+
+#category_Btn:hover{
+    background-color: rgb(255, 255, 255, 0.8);
+}
+
+#category_Btn img{
+    float:left;
+    width: 45px;
+    height: 45px;
+    margin-left: 2px;
+}
+
+#category_Btn span{
+    font-size: 37.75px;
+    font-family: 'MaplestoryOTFBold';
+}
+
+#topMenu{
+    display: none;
+    width: 200px;
+    text-align: center;
+    background-color: rgb(255, 255, 255, 0.8);
+}
+#topMenu li a{
+    line-height: 40.75px;
+    font-size:24px;
+    color:black;
+    font-weight:600;
+}
+
+#topMenu > li > a:hover{
+    color: red;
+}
+
+/* nav 버튼그룹 */
+/* 언제든지 개수와 수 변경 가능 */
+.nav_BtnGroup {
+    float: left;
+    margin-left: 40px;
+}
+
+.nav_BtnGroup .nav_Btn{
+    margin-right: 10px;
+    width: 150px;
+    height: 50px;
+    border: 0px;
+    background-color: rgb(255, 255, 255, 0.0);
+}
+
+.nav_Btn a {
+    font-size: 37.75px;
+    font-family: 'MaplestoryOTFBold';
+    color: black;
+}
+
+.nav_Btn a:hover{
+    color: red;
+}
+
+/* 카테고리 관련 끝 */
+
+/* 메인 */
+
+main {
+    width: 100%;
+    height: 1900px;
+
+}

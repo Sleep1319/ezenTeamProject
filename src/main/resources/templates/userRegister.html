@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" th:href="'css/login.css'">
+<link
+	href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
+	rel="stylesheet">
+</head>
+<body>
+	<div class="login_wrapper">
+		<div class="login_logo">회원가입</div>
+		<form class="login_form" method="post" action="./RegisterServlet" name="userInfo"><!-- 포스트방식 아래 서브밋으로 보내면 엑션 파일로 이동 -->
+			<input id="LOGIN_ID" class="login_text" type="text" name="userID" onkeydown="inputIDcheck()" placeholder="아이디를 입력하시오">
+			<!--<button type="button" onClick="openCheck()">중복체크</button> 버튼 에러 서블릿으로 대체-->
+			<input type="hidden" name="idDuplication" value ="idUncheck">
+			<input id="LOGIN_EMAIL" class="login_text"  type="text" name="userEmail" placeholder="이메일을 입력하시오 조건비활">
+			<input id="LOGIN_PW"class="login_text" type="password" name="userPassword" placeholder="비밀번호를 입력하시오">
+			<input id="LOGIN_PWch"class="login_text" type="password" name="userPasswordCK" placeholder="비밀번호 확인">
+			
+			<input id="LOGIN_NAME" class="login_text" type="text" name="userName" placeholder="이름을 입력하시오">
+			<input id="LOGIN_PHONE" class="login_text" type="text" name="userPhone" placeholder="핸드폰 번호를 입력하시오 조건비활">
+			<input class="postBut" type="button" value="우편번호찾기" onclick="kakaopost()">
+			<input id="LOGIN_POST" class="login_text" type="text" name="userPost" placeholder="우편번호">
+			<input id="LOGIN_ADDR" class="login_text" type="text" name="userAddr" placeholder="주소">
+			<input id="ADDR_DETAIL" class="login_text" type="text" name="Addrdetail" placeholder="상세주소">
+			<!--<input id="LOGIN_BIRTH" class="login_date" type="date" name="userBirth" placeholder="생년월일 임시 쓰지마 널체크야">-->
+			<button id="LOGIN_BTN" class="login_btn" type="submit" onclick="checkValue()" >회원가입</button>
+		</form>
+			<a class = "login_bottom" href="userLogin.html" >로그인 하기</a>
+	</div>
+
+	<script type="module" th:src="@{js/login.js}"></script>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script>
+	</script>
+	<script th:src="@{js/register.js}"></script>
+	
+</body>
+</html>
