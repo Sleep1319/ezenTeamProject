@@ -48,7 +48,7 @@ public class UserDAO {
 	
 	//로그인 성공시 유저 이름 가져오는 구문 위와 통합 개발중
 	public ArrayList<String> info(String userID) {
-		String sql = "SELECT userID, userEmail, userName, userPhone, userPost, userAddr, addr_detail FROM USERINFO Where userID = ?";
+		String sql = "SELECT userID, userEmail, userName, userPhone, userBirth, userPost, userAddr, addr_detail, inherenceID FROM USERINFO Where userID = ?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -63,9 +63,11 @@ public class UserDAO {
 	            userInfoList.add(rs.getString("userEmail"));
 	            userInfoList.add(rs.getString("userName"));
 	            userInfoList.add(rs.getString("userPhone"));//Uint 활용? 넘버 오버플로우 발생시 활용 필요, 일단 롱부터
+				userInfoList.add(rs.getString("userBirth"));
 	            userInfoList.add(rs.getString("userPost"));
 	            userInfoList.add(rs.getString("userAddr"));
 	            userInfoList.add(rs.getString("addr_detail"));
+				userInfoList.add(rs.getString("inherenceID"));
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -113,7 +115,7 @@ public class UserDAO {
 
 	public int join (UserDTO user) {//클래스형 파라미터 선언, join(new UserDTO());선언시 = UserDTO user = new UserDTO(); 와 같은 형식
 		String sqlSelect = "SELECT COUNT(userID) FROM USERINFO WHERE userID = ?";
-		String sqlInsert = "INSERT INTO USERINFO VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?)";//(null(디비에서 값 자동지정), userID, userEmail, us...)
+		String sqlInsert = "INSERT INTO USERINFO VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?)";//(null(디비에서 값 자동지정), userID, userEmail, us...)
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -138,9 +140,10 @@ public class UserDAO {
         pstmt.setString(3, user.getUserPassword());//암튼 DTO에 저장된 값들 가져와서 대입한다
         pstmt.setString(4, user.getUserName());
         pstmt.setString(5, user.getUserPhone());//스트링인 이유 폰번호 인트로하면 그n자리 수가 되어서
-        pstmt.setString(6, user.getUserPost());
-        pstmt.setString(7, user.getUserAddr());
-        pstmt.setString(8, user.getAddr_detail());
+		pstmt.setString(6, user.getUserBirth());
+        pstmt.setString(7, user.getUserPost());
+        pstmt.setString(8, user.getUserAddr());
+        pstmt.setString(9, user.getAddr_detail());
 //        pstmt.setDate(7, new java.sql.Date(user.getUserBirth().getTime()));
 
         return pstmt.executeUpdate();//데이터베이스에 영향을 미치는 SQL 쿼리(INSERT, UPDATE, DELETE)를 실행
@@ -158,4 +161,88 @@ public class UserDAO {
     
     return -2; // 데이터베이스 오류
 }
+	public int infoUpdate (String userID, String userEmail, String userPhone, String userBirth, String userPost, String userAddr, String addr_detail) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE USERINFO SET userEmail = ?, userPhone = ?, userBirth = ?, userPost = ?, userAddr = ?, addr_detail = ? WHERE userID = ?";
+
+		try {
+			conn = DatabaseUtil.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userEmail);
+			pstmt.setString(2, userPhone);
+			pstmt.setString(3, userBirth);
+			pstmt.setString(4, userPost);
+			pstmt.setString(5, userAddr);
+			pstmt.setString(6, addr_detail);
+			pstmt.setString(7, userID);
+			return pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try { if(conn != null) conn.close(); }
+			catch (Exception e) { e.printStackTrace(); }
+			try { if(pstmt != null) pstmt.close(); }
+			catch (Exception e) { e.printStackTrace(); }
+		}
+		return -2;
+	}
+
+	public String findID (String userName, String userEmail, String userPhone) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT userID FROM USERINFO WHERE userName = ? AND userEmail = ? AND userPhone = ?";
+		String ID = null;
+
+		try {
+			conn = DatabaseUtil.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userName);
+			pstmt.setString(2, userEmail);
+			pstmt.setString(3, userPhone);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				ID = rs.getString(1);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}  finally {
+			try { if(conn != null) conn.close(); }
+			catch (Exception e) { e.printStackTrace(); }
+			try { if(pstmt != null) pstmt.close(); }
+			catch (Exception e) { e.printStackTrace(); }
+		}
+		return ID;
+	}
+
+	public String findPW (String userID, String userName, String userPhone) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT userPassword FROM USERINFO WHERE userID = ? AND userName = ? AND userPhone = ?";
+		String PW = null;
+
+		try {
+			conn = DatabaseUtil.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userName);
+			pstmt.setString(2, userName);
+			pstmt.setString(3, userPhone);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				PW = rs.getString(1);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}  finally {
+			try { if(conn != null) conn.close(); }
+			catch (Exception e) { e.printStackTrace(); }
+			try { if(pstmt != null) pstmt.close(); }
+			catch (Exception e) { e.printStackTrace(); }
+		}
+		return PW;
+	}
 }

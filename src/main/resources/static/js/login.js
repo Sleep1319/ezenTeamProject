@@ -22,7 +22,7 @@ function color() {
 
 /*function moveTosubMain() {
     window.alert("로그인 성공");
-    location.replace("main.html");
+    location.replace("mainback.html");
 }
 
 function falseLogin() {

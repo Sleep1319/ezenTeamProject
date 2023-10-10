@@ -18,6 +18,14 @@ public class LoginController {
 								@RequestParam("userPassword") String userPassword,
 								HttpSession session,
 								Model model) {
+
+		String loginID = null;
+		loginID = (String) session.getAttribute("userID");
+
+		if(loginID != null) {
+			model.addAttribute("message", "이미 로그인이 되어 있는 상태 입니다");
+			return "main";
+		}
 		
 		UserDAO userDAO = new UserDAO();
 		int result = userDAO.login(userID, userPassword);
@@ -29,9 +37,11 @@ public class LoginController {
 			session.setAttribute("userEmail", infoList.get(1));
 			session.setAttribute("userName", infoList.get(2));
 			session.setAttribute("userPhone", infoList.get(3));
-			session.setAttribute("userPost", infoList.get(4));
-			session.setAttribute("userAddr", infoList.get(5));
-			session.setAttribute("addr_detail", infoList.get(6));
+			session.setAttribute("userBirth", infoList.get(4));
+			session.setAttribute("userPost", infoList.get(5));
+			session.setAttribute("userAddr", infoList.get(6));
+			session.setAttribute("addr_detail", infoList.get(7));
+			session.setAttribute("inherenceID", infoList.get(8));
 
 			if(userID != null && userID.equals("admin")) {
 				model.addAttribute("message", "관리자로 로그인하셨습니다.");
@@ -52,7 +62,7 @@ public class LoginController {
 		else if (result == -2) {
 			model.addAttribute("message", "DB에러.");
 		}
-		return "userLogin";
+		return "login";
 	}
 
 }

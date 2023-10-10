@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원정보</title>
+    <link media="all" rel="stylesheet" th:href="@{/css/main.css}" type="text/css"/>
+    <link media="all" rel="stylesheet" th:href="@{/css/side_btn.css}" type="text/css"/>
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/mypage.css">
+</head>
+
+<body>
+<div class="shell">
+    <div id="header">
+        <h1 id="logo"><a href="/"></a></h1>
+
+        <ul class="nav-menu-right">
+            <li th:if="${session.userID == null}"><a href="login.html">로그인</a></li>
+            <li th:if="${session.userID == null}"><a href="register.html">회원가입</a></li>
+            <li th:if="${session.userID != null}"><a th:text="'사용자: ' + ${session.userName}"></a></li>
+            <li th:if="${session.userID != null && !session.userID.equals('admin')}"><a href="mypage.html">마이페이지</a></li>
+            <li th:if="${session.userID != null && !session.userID.equals('admin')}"><a href="itemBasket.html">장바구니</a></li>
+            <li th:if="${session.userID != null && session.userID.equals('admin')}"><a href="management">상품관리</a></li>
+            <li th:if="${session.userID != null}"><a href="userLogout.html">로그아웃</a></li>
+            <li><a href="service_center">고객센터</a></li>
+        </ul>
+
+        <div class="nav-menu">
+            <a href="#"><img alt="남자" src="/css/images/man.jpg"></a>
+            <a href="#"><img alt="여자" src="/css/images/woman.jpg"></a>
+        </div>
+    </div>
+</div>
+
+
+    <div class="all">
+        <div class="mypage_big_box">
+            <div class="mypage">
+                <div class="board-container">
+                    <h1 id="myinfo"> 마이페이지 </h1>
+                    <form method="post" action="/infoUpdate">
+                    <table width="80%">
+                        <tr>
+                            <th>아이디</th>
+                            <td>
+                                <input type="text" name="userName" th:value="${session.userID}" readonly>
+                            </td>
+                        </tr>
+                            <tr>
+                                <th>이름</th>
+                                <td>
+                                    <input type="text" name="userName" th:value="${session.userName}" readonly>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>이메일</th>
+                                <td>
+                                    <input type="text" name="userEmail" class="userInfo" th:value="${session.userEmail}" readonly>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>전화번호</th>
+                                <td>
+                                    <input type="text" name="userPhone" class="userInfo" th:value="${session.userPhone}" readonly>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>생년월일</th>
+                                <td>
+                                    <input type="text" name="userBirth" class="userInfo" th:value="${session.userBirth}" readonly>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>우편번호</th>
+                                <td>
+                                    <input type="text" name="userPost" class="userInfo" th:value="${session.userPost}" readonly>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>주소</th>
+                                <td>
+                                        <input type="text" name="userAddr" class="userInfo" th:value="${session.userAddr}" readonly>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>상세 주소</th>
+                                <td>
+                                    <input type="text" name="addr_detail" class="userInfo" th:value="${session.addr_detail}" readonly>
+                                </td>
+                            </tr>
+                    </table>
+                        <div class="mod_home">
+
+<!--                                <input type="button" value="수정하기" class="modMember" onclick="userInfoUpdate()">-->
+                                <input type="button" class="btn" value="수정" onclick="chBoard()">
+<!--                                <input type="submit" value="수정" class="updateBtn" onclick="userInfoUpdate()">-->
+                                <input type="submit" class="hiddenBtn" value="확인" onclick="update('Insert')">
+                                <input type="button" class="hiddenBtn" value="취소" onclick="location.reload()">
+<!--                                <input type="button" class="goHome" value="메인" onclick="location.href='/'">-->
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="/js/mypage.js"></script>
+<script>
+    var message = "[[${message}]]";
+    if (message && message.trim() !== "") {
+        alert(message);
+    }
+</script>
+</body>
+
+</html>

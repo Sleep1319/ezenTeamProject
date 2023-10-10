@@ -19,26 +19,26 @@ public class PayCheckItemController {
 							@RequestParam("itemName") String itemName,
 							@RequestParam("itemAmount") String itemAmount,
 							@RequestParam("itemType") String itemType,
-							@RequestParam("buyCount") String buyCount,
 							@RequestParam("totalAmount") String totalAmount,
+							@RequestParam("buyCount") String buyCount,
 							Model model,
 							HttpSession session) {
 
 		
-		if(itemID == null || itemName == null || itemAmount == null|| itemType == null || buyCount == null || totalAmount == null) {
+		if(itemID == null || itemName == null || itemAmount == null|| itemType == null || totalAmount == null) {
 			model.addAttribute("message", "아이템정보 체크 오류");
 			return "itemBasket";
 		}
 		ItemDAO itemDAO = new ItemDAO();
 		
-		int result = itemDAO.itemCheck(itemID, itemName, itemAmount, itemType, buyCount, totalAmount);
+		int result = itemDAO.itemCheck(itemID, itemName, itemAmount, itemType,totalAmount);
 		if(result == 1) {
 			model.addAttribute("payItemID", itemID);
 			model.addAttribute("payItemName", itemName);
 			model.addAttribute("payItemAmount", itemAmount);
 			model.addAttribute("payItemType", itemType);
-			model.addAttribute("payBuyCount", buyCount);
 			model.addAttribute("payTotalAmount", totalAmount);
+			model.addAttribute("buyCount", buyCount);
 			return "payApi";
 
 		} else {

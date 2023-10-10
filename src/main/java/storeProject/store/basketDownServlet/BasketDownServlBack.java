@@ -40,7 +40,7 @@ package storeProject.store.basketDownServlet;
 //		
 //		String userID = null;
 //		String basketID = null;
-//		String inherencID = null;
+//		String inherenceID = null;
 //		String itemID = null;
 //		
 //		String dummyData = null;
@@ -66,11 +66,11 @@ package storeProject.store.basketDownServlet;
 //		BasketDAO basketDAO = new BasketDAO();
 //		ArrayList<String> selectList = basketDAO.basketInfo(userID);
 //		basketID = selectList.get(0);
-//		inherencID = selectList.get(1);
+//		inherenceID = selectList.get(1);
 //		itemID = selectList.get(2);
 //		if (basketID != null) {
 //			session.setAttribute("basketID", basketID);
-//			session.setAttribute("inherencID", inherencID);//값 전송 필요 없으면 삭제 필요
+//			session.setAttribute("inherenceID", inherenceID);//값 전송 필요 없으면 삭제 필요
 //			session.setAttribute("itemID", itemID);
 ////			PrintWriter script = response.getWriter();
 //			script.println("<script>");

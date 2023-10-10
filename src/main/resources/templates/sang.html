@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta content="text/html; charset=utf-8" />
+<title>HCLY</title>
+<link media="all" rel="stylesheet" th:href="@{/css/main.css}" type="text/css"/>
+<link rel="stylesheet" th:href="@{/css/sang.css}" type="text/css" media="all" />
+<link rel="stylesheet" th:href="@{/css/side_btn.css}" type="text" media="all" />
+</head>
+<body>
+<div class="shell">
+  <div id="header">
+    <h1 id="logo"><a href="/"></a></h1>
+    
+    <ul class="nav-menu-right">
+        <li th:if="${session.userID == null}"><a href="login.html">로그인</a></li>
+        <li th:if="${session.userID == null}"><a href="register.html">회원가입</a></li>
+        <li th:if="${session.userID != null}"><a th:text="'사용자: ' + ${session.userName}"></a></li>
+        <li th:if="${session.userID != null && !session.userID.equals('admin')}"><a href="mypage.html">마이페이지</a></li>
+        <li th:if="${session.userID != null && !session.userID.equals('admin')}"><a href="itemBasket.html">장바구니</a></li>
+        <li th:if="${session.userID.equals('admin')}"><a href="management">상품관리</a></li>
+        <li th:if="${session.userID != null}"><a href="userLogout.html">로그아웃</a></li>
+        <li><a href="service_center">고객센터</a></li>
+    </ul>
+    
+    <div class="nav-menu">
+      <a href="#"><img src="/css/images/man.jpg" alt="남자"></a>
+      <a href="#"><img src="/css/images/woman.jpg" alt="여자"></a>
+    </div>
+  </div>
+</div>
+
+
+  <div id="main">
+    <div id="sidebar" style="float: left;">
+      <div class="box search">
+        <h2>검색 </h2>
+        <div class="box-content">
+          <form action="/itemNameSearch" method="post">
+            <label>이름 검색</label>
+            <input type="text" class="field" name="itemName" />
+            <label>카테고리</label>
+            <select class="field">
+              <option value="">-- 카테고리 선택 --</option>
+            </select>
+            <div class="inline-field">
+              <label>가격</label>
+              <select class="field-small-field">
+                <option value="">1만원</option>
+              </select>
+              <label>부터:</label>
+              <select class="field-small-field">
+                <option value="">5만원</option>
+              </select>
+            </div>
+            <input type="submit" class="search-submit" value="검색" />
+            <p> <a href="#" class="bul">고급 검색</a><br />
+              <a href="#" class="bul">고객 지원에 문의</a> </p>
+          </form>
+        </div>
+      </div>
+    
+
+
+      <div class="box categories">
+        <h2>카테고리 </h2>
+        <div class="box-content">
+          <ul>
+            <li><a href="#">카테고리 1</a></li>
+            <li><a href="#">카테고리 2</a></li>
+            <li><a href="#">카테고리 3</a></li>
+            <li><a href="#">카테고리 4</a></li>
+            <li><a href="#">카테고리 5</a></li>
+            <li><a href="#">카테고리 6</a></li>
+            <li><a href="#">카테고리 7</a></li>
+            <li><a href="#">카테고리 8</a></li>
+            <li><a href="#">카테고리 9</a></li>
+            <li><a href="#">카테고리 10</a></li>
+            <li><a href="#">카테고리 11</a></li>
+            <li><a href="#">카테고리 12</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+   
+    <div id="content" style="float: right;">
+      <div id="banner" class="box">
+        <div id="nanner-holder">
+          <ul>
+            <li><a><img src="/css/images/banner/sang_banner.jpg" alt="" /></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="products" th:if="${!itemAllList.isEmpty()}">
+        <ul>
+          <li th:each="item : ${itemAllList}">
+              <form method="post" action="/basket">
+                  <input type="hidden" name="itemID" th:value="${item.getItemID()}">
+              <a href="#"><img th:src="@{/css/images/woman/} + ${item.getItemImg()}" alt="" /></a>
+            <div class="product-info">
+              <h3 th:text="${item.getItemName()}"></h3>
+              <div class="product-desc">
+                <h4 th:text="${item.getItemType()}"></h4>
+                <p th:text="${item.getItemInfoDetail()}"><br>
+                  </p>
+                <strong class="price" th:text="'가격: ' + ${item.getItemAmount()}"></strong> </div>
+                <input type="submit" value="장바구니 이동">
+            </div>
+              </form>
+          </li>
+
+
+        </ul>
+        <div class="more-bar"></div>
+      </div>
+        <div th:unless="${!itemAllList.isEmpty()}">준비된 상품이 없습니다</div>
+      <div class="side-full">
+
+        <div class="more-products">
+          <div class="more-products-holder">
+            <ul>
+              <li><a href="#"><img src="/css/images/small/94px (1).jpg" alt="" /></a></li>
+              <li><a href="#"><img src="/css/images/small/94px (2).jpg" alt="" /></a></li>
+              <li><a href="#"><img src="/css/images/small/94px (3).jpg" alt="" /></a></li>
+              <li><a href="#"><img src="/css/images/small/94px (4).jpg" alt="" /></a></li>
+              <li><a href="#"><img src="/css/images/small/94px (5).jpg" alt="" /></a></li>
+              <li><a href="#"><img src="/css/images/small/94px (6).jpg" alt="" /></a></li>
+              <li><a href="#"><img src="/css/images/small/94px (7).jpg" alt="" /></a></li>
+              <li><a href="#"><img src="/css/images/small/94px (8).jpg" alt="" /></a></li>
+              <li><a href="#"><img src="/css/images/small/94px (9).jpg" alt="" /></a></li>
+              <li><a href="#"><img src="/css/images/small/94px (10).jpg" alt="" /></a></li>
+              <li><a href="#"><img src="/css/images/small/94px (11).jpg" alt="" /></a></li>
+              <li><a href="#"><img src="/css/images/small/94px (12).jpg" alt="" /></a></li>
+              <li><a href="#"><img src="/css/images/small/94px (13).jpg" alt="" /></a></li>
+              <li><a href="#"><img src="/css/images/small/94px (14).jpg" alt="" /></a></li>
+              <li><a href="#"><img src="/css/images/small/94px (1).jpg" alt="" /></a></li>
+              <li><a href="#"><img src="/css/images/small/94px (2).jpg" alt="" /></a></li>
+              <li><a href="#"><img src="/css/images/small/94px (3).jpg" alt="" /></a></li>
+              <li><a href="#"><img src="/css/images/small/94px (4).jpg" alt="" /></a></li>
+              <li><a href="#"><img src="/css/images/small/94px (5).jpg" alt="" /></a></li>
+              <li><a href="#"><img src="/css/images/small/94px (6).jpg" alt="" /></a></li>
+            </ul>
+          </div>
+        </div>
+        </div>
+    </div>
+
+
+
+  </div><!--메인-->
+
+
+  
+
+<!--푸터-->
+<div id="footer-r">
+  <div class="footer-top">
+      <div>
+          <div>
+              <p class="footer-subtitle">DELIVERY</p>
+              <p>교환/반품주소지 :</p>
+              <p>천웅 집</p>
+          </div>
+          <div >
+              <p class="footer-subtitle">고객센터</p>
+              <div class="fast" style="cursor: pointer;"> <!-- 상담 API 기능 (유료ㅠㅠ)/마우스 오버시 마우스포인트 모양-->
+                  <span class="mainicon kakaotalk"></span> <!--버튼용-->
+                  <span class="name">010-123-1234</span>
+              </div>
+              <div class="fast" style='cursor: pointer;'> <!-- 상담 API 기능 (유료ㅠㅠ)/마우스 오버시 마우스포인트 모양 -->
+                  <span class="mainicon navertalk"></span> <!--버튼용 -->
+                  <span class="name">02-1234-1234</span>
+              </div>
+              <p style="color:#525252; margin-top:15px;">상담 가능 시간 </p>
+              <p>평일 : 09시 ~ 18시 &nbsp;&nbsp;&nbsp; 점심시간 : 12 ~ 13시 </p>
+              <p style="margin: 11px auto;">(응 주말 공휴일 휴무야~)</p>
+          </div>
+      </div>
+      <div>
+          <div>
+              <p class="footer-subtitle" style="cursor:pointer;"
+                  onclick="location.href='/board/list.php?boardid=csnotice'">NOTICE +</p>
+
+              <p><a href="">- 공지 안내문_01 </a></p>
+              <p><a href="">- 공지 안내문_02 </a></p>
+              <p><a href="">- 공지 안내문_03 </a></p>
+
+          </div>
+          <div>
+              <p class="footer-subtitle">ABOUT ♥ HCLY ♥</p>
+              <p>HCLY 쇼핑몰</p>
+              <p>대표 : 천웅 | 전화 : 1234-4567 | 팩스 : 02)7654-4321</p>
+              <p>주소 : 사랑시 고백구 행복동~ </p>
+              <p>사업자등록번호 : 123-12-12345</p>
+              <p>책임자 : 한동훈,천웅,이지수,윤소리 </p>
+              <p>제휴,협찬,유통 문의 : <span style="color:black;">이메일주소@</span> </p>
+          </div>
+          <div style="color:#c8c8c8; margin-top:19px;">
+              ========== 멘트 ==========
+          </div>
+      </div>
+      <div>
+          <div>
+              <p class="footer-subtitle">쇼핑몰 장점</p>
+              <p> 옷이 이뻐요~ </p>
+              <p> 옷이 저렴해요~ </p>
+              <p> 배송이 빨라요~ </p>
+              <p> <img src="img/bottom_01.jpg"></p>
+          </div>
+          <div style="margin:30px 0;">
+              <a href="javascript:;" style="cursor:default"> </a>
+          </div>
+          <div>
+              <p></p> <!--예비용-->
+          </div>
+      </div>
+  </div>
+  <div class="footer-bottom">
+      <div class="bottomwrap">
+          <div class="navbtn">
+              <ul class="footer_ul">
+                  <li> <a href=" 파일명 ">이용안내</a> </li>
+                  <li> <a href=" 파일명 ">이용약관</a> </li>
+                  <li> <a href=" 파일명 ">개인정보처리방침</a> </li>
+                  <li> <a href=" 파일명 ">파트너쉽</a> </li>
+                  <li> <a href=" 파일명 ">멤버쉽</a> </li>
+                  <li> <a href=" 웹페이지 모바일용 ">모바일버전</a> </li>
+                  <!-- <li> 다크모드 </li>  어우 ,, -->
+              </ul>
+          </div>
+
+      </div>
+  </div>
+  <div class="btn_quick">
+      <ul class="btn_qucik_wrap">
+          <li>
+              <a href="" alt="ABC">
+                  <img src="/css/images/Button/Button_ (1).jpg" alt="" class="ABC">
+              </a>
+              <div class="hovertxt"><span>검색 </span></div>
+          </li>
+          <li class="">
+              <a href="" onclick="">
+                  <img src="/css/images/Button/Button_ (2).jpg" alt="" class="">
+              </a>
+              <div id="" style="display:none;"> <!--닫기 아이콘 제거를 위해-->
+                  <ul class="">
+                      <li class="pickClose" onclick="" style="border:0;">
+                          <img src="img/Button/x_close.png" alt="">
+                      </li>
+                  </ul>
+              </div>
+              <div class="hovertxt"><span>마이페이지</span></div>
+          </li>
+          <li>
+              <a class="naver" href="javascript:;" onclick="window.open('ㅁㅁㅁㅁㅁ');return false;"
+                  target="_blank"><img src="/css/images/Button/Button_ (3).jpg" alt="네이버톡" class="Q_button"></a>
+          </li>
+          <li>
+              <a class="kakao" href="javascript:;" onclick="javascript:window.open('ㅁㅁㅁㅁㅁ');"><img
+                      src="/css/images/Button/Button_ (4).jpg" alt="카카오톡" class="Q_button"></a>
+          </li>
+          <li>
+              <a class="up" onclick="scrollup()"><img src="/css/images/Button/Arrow (1).jpg" alt="위로"
+                      style='cursor: pointer;' class="Q_button"></a>
+              <div class="hovertxt"></div>
+          </li>
+          <li>
+              <a class="down" onclick="scrolldown()"><img src="/css/images/Button/Arrow (1).jpg" alt="아래로"
+                      style='cursor: pointer; transform:rotate(180deg) translateX(-2px);' class="Q_button"></a>
+              <div class="hovertxt"></div>
+          </li>
+      </ul>
+  </div>
+</div>
+   
+</div>
+
+<script src="js/side_btn.js"></script>
+<script>
+    var message = "[[${message}]]";
+    if (message && message.trim() !== "") {
+        alert(message);
+    }
+</script>
+</body>
+</html>

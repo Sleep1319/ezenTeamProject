@@ -1,118 +1,90 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>장바구니</title>
-	<link rel="stylesheet" href="/css/main.css" >
+	<title>HCLY</title>
+	<link rel="stylesheet" href="/css/itemBasket.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="/css/font.css" />
+	<link media="all" rel="stylesheet" th:href="@{/css/main.css}" type="text/css" />
+	<link media="all" rel="stylesheet" th:href="@{/css/side_btn.css}" type="text/css" />
 </head>
 
 <body>
-<div id="container">
-	<div class="headImg"></div>
-	<header>
-		<div class="head_Se1">
-			<div class="top_logo">
-				<button type="button" id="top_LogoBtn"><a href="main.html">웅스토어</a></button>
-			</div>
-			<div class="top_Search">
-                <span> <input type="text" placeholder="검색어 입력" id="inputTypeText">
-                    <button type="submit" id="top_SearchBtn">
-                        <img id="searchIcon" src="/images/pngwing.com.png">
-                    </button>
-                </span>
-			</div>
-			<div id="userJoin">
-                <span>
-                <div th:if="${session.userID == null}">
-                    <a href="userLogin.html">로그인</a> <a href="userRegister.html">회원가입</a>
-                </div>
-                <div th:unless="${session.userID == null}">
-                    <a href="userInfo.html" id="userName" th:text="'사용자 ' + ${session.userName} +'님'"></a> <a href="userLogout.html">로그아웃</a>
-                </div>
-                <div th:if="${session.userID == 'admin'}">
-                    <a href="itemUp.jsp">상품관리</a>
-                </div>
-                <a href="serviceCenter.jsp">고객센터</a>
-                    </span>
+<div class="shell">
+	<div id="header">
+		<h1 id="logo"><a href="/"></a></h1>
+
+		<ul class="nav-menu-right">
+			<li th:if="${session.userID == null}"><a href="login.html">로그인</a></li>
+			<li th:if="${session.userID == null}"><a href="register.html">회원가입</a></li>
+			<li th:if="${session.userID != null}"><a th:text="'사용자: ' + ${session.userName}"></a></li>
+			<li th:if="${session.userID != null && !session.userID.equals('admin')}"><a href="mypage.html">마이페이지</a>
+			</li>
+			<li th:if="${session.userID != null && !session.userID.equals('admin')}"><a
+					href="itemBasket.html">장바구니</a></li>
+			<li th:if="${session.userID != null && session.userID.equals('admin')}"><a href="management">상품관리</a>
+			</li>
+			<li th:if="${session.userID != null}"><a href="userLogout.html">로그아웃</a></li>
+			<li><a href="service_center">고객센터</a></li>
+		</ul>
+
+		<div class="nav-menu">
+			<a href="#"><img alt="남자" src="/css/images/man.jpg"></a>
+			<a href="#"><img alt="여자" src="/css/images/woman.jpg"></a>
+		</div>
+	</div>
+</div>
+
+<div id="main">
+	<h1 class="h1">리스트</h1>
+	<div class="content">
+		<div th:if="${!basitemList.isEmpty()}">
+			<div th:each="basItem : ${basitemList}">
+				<form method="post" action="/PayCheck">
+					<input type="hidden" name="itemID" th:value="${basItem.getItemID()}">
+					<table>
+						<tr>
+							<td>이름</td>
+							<td><input type="text" name="itemName" th:value="${basItem.getItemName()}" readonly class="userInfo">
+							</td>
+						</tr>
+						<tr>
+							<td>가격</td>
+							<td><input type="text" name="itemAmount" th:value="${basItem.getItemAmount()}" readonly class="userInfo">
+							</td>
+						</tr>
+						<tr>
+							<td>종류</td>
+							<td><input type="text" name="itemType" th:value="${basItem.getItemType()}" readonly class="userInfo">
+							</td>
+						</tr>
+						<tr>
+							<td>구매개수</td>
+							<td><input type="text" name="buyCount" value="1" readonly class="userInfo"></td>
+						</tr>
+						<tr>
+							<td>최종가격</td>
+							<td><input type="text" name="totalAmount"
+									   th:value="${basItem.getItemAmount() * basItem.getItemCount()}" readonly class="userInfo"></td>
+
+						</tr>
+					</table>
+					<button type="submit" class="btn_pur">구매하기</button>
+				</form>
 			</div>
 		</div>
-		<nav>
-			<div class="nav_Category">
-				<button id="category_Btn" onclick="cate()" type="button">
-					<img src="/images/free-icon-options-lines-82122.png">
-					<!-- 메뉴 아이콘  제작자: Freepik - Flaticon-->
-					<span>카테고리</span>
-				</button>
-				<ul id="topMenu">
-					<li><a href="store.html">상점가자</a></li>
-					<li><a href="itemBasket.html">장바구니</a></li>
-					<li><a href="board.jsp">게시판</a></li>
-					<li><a href="#">카테고리</a></li>
-				</ul>
-			</div>
-			<div class="nav_BtnGroup">
-                <span> <!-- 언제든지 개수와 수 변경 가능 -->
-                    <button class="nav_Btn" type="button">
-                        <a href="#">임시 버튼</a>
-                    </button>
-                    <button class="nav_Btn" type="button">
-                        <a href="#">임시 버튼</a>
-                    </button>
-                    <button class="nav_Btn" type="button">
-                        <a href="#">임시 버튼</a>
-                    </button>
-                    <button class="nav_Btn" type="button">
-                        <a href="#">임시 버튼</a>
-                    </button>
-                        </span>
-			</div>
-		</nav>
-	</header>
-		<main>
-				
-			<h1>리스트</h1>
-			<div th:each="basItem : ${basitemList}">
-			<form method="post" action="/PayCheck">
-			<input type="hidden" name="itemID" th:value="${basItem.getItemID()}">
-			<table border="1px">
-				<tr>
-					<td>이름</td>
-					<td><input type="text" name="itemName" th:value="${basItem.getItemName()}" readonly></td>
-				</tr>
-				<tr>
-					<td>가격</td>
-					<td><input type="text" name="itemAmount" th:value="${basItem.getItemAmount()}" readonly></td>
-				</tr>
-				<tr>
-					<td>종류</td>
-					<td><input type="text" name="itemType" th:value="${basItem.getItemType()}" readonly></td>
-				</tr>
-<!-- 카운트 변경--><tr>
-					<td>구매개수</td>
-					<td><input type="text" name="buyCount" value="1" readonly></td>
-				</tr>
-				<tr>
-					<td>최종가격</td>
-
-					<td><input type="text" name="totalAmount" th:value="${basItem.getItemAmount() * basItem.getItemCount()}" readonly></td>
-					
-				</tr>		
-			</table>
-			<button type="submit">구매하기</button>
-			</form>
-			</div>
-			<div th:if="${basketList.isEmpty()}">
+		<div th:if="${basketList.isEmpty()}">
 			<p>장바구니가 비어있습니다
 				추후 이동 기능 추가 필요
 			</p>
-			</div>
-		</main>
+		</div>
 	</div>
-	<script>
-    </script>
-	<script src="js/action.js"></script>
-	
+</div>
+
+<script>
+</script>
+<script src="js/action.js"></script>
 </body>
 
 </html>

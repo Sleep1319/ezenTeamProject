@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/register.css" />
+
+    <script src="/js/modify.js"></script>
+</head>
+
+<body>
+    <div class="user_area">
+        <div class="user_area_inner">
+            <h2>회원가입</h2>
+            <div class="register_form">
+                <form name="registerForm" method="post" action="/register">
+                    <fieldset>
+                        <legend>회원가입 폼</legend>
+                        <input type="text" name="userName" size="20" placeholder="이름" class="user_input_name"><br>
+                        <input type="text" name="userID" size="20" placeholder="아이디" class="user_input_id"><br>
+                        <input type="password" name="userPassword" size="20" placeholder="비밀번호" class="user_input_pwd"><br>
+                        <input type="password" size="20" placeholder="비밀번호 재확인" class="user_input_pwd"><br>
+                        <input type="email" name="userEmail" size="10" placeholder="이메일" class="user_input_email"><br>
+                        <input type="text" name="userPhone" size="20" placeholder="전화번호" class="user_input_num"><br>
+                        <input type="date" name="userBirth" class="user_input_birth"><br>
+                        <input class="postBut" type="button" value="우편번호찾기" onclick="kakaopost()">
+                        <input id="LOGIN_POST" type="text" name="userPost" placeholder="우편번호" class="user_input_post">
+                        <input id="LOGIN_ADDR" type="text" name="userAddr" size="20" placeholder="주소" class="user_input_add"><br>
+                        <input id="ADDR_DETAIL" type="text" name="addr_detail" placeholder="상세주소" class="user_input_addDetail">
+                        <div class="user_input_btn">
+                            <input type="submit" name="btn_submit" value="완료" class="btn_submit">
+                            <a href="login.html"><input type="button" name="btn_reset" value="취소" class="btn_reset">
+                            </a>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <script type="module" src="/js/login.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="/js/register.js"></script>
+    <script>
+        var message = "[[${message}]]";
+        if (message && message.trim() !== "") {
+            alert(message);
+        }
+    </script>
+</body>
+
+</html>

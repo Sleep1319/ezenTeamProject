@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>웅스토어</title>
+    <link rel="stylesheet" href="/css2/main2.css" >
+</head>
+
+<body>
+<div id="container">
+    <div class="headImg">
+    <header>
+        <div class="head_Se1">
+            <div class="top_logo">
+                <button type="button" id="top_LogoBtn"><a href="/">웅스토어</a></button>
+            </div>
+            <div class="top_Search">
+                <span> <input type="text" placeholder="검색어 입력" id="inputTypeText">
+                    <button type="submit" id="top_SearchBtn">
+                        <img id="searchIcon" src="/images/pngwing.com.png">
+                    </button>
+                </span>
+            </div>
+            <div id="userJoin">
+                <span>
+                <div th:if="${session.userID == null}">
+                    <a href="userLogin.html">로그인</a> <a href="userRegister.html">회원가입</a>
+                </div>
+                <div th:unless="${session.userID == null}">
+                    <a href="userInfo.html" id="userName" th:text="'사용자 ' + ${session.userName} +'님'"></a> <a href="userLogout.html">로그아웃</a>
+                </div>
+                <div th:if="${session.userID == 'admin'}">
+                    <a href="itemUp.jsp">상품관리</a>
+                </div>
+                <a href="serviceCenter.jsp">고객센터</a>
+                    </span>
+            </div>
+        </div>
+        <nav>
+            <div class="nav_Category">
+                <button id="category_Btn" onclick="cate()" type="button">
+                    <img src="/images/free-icon-options-lines-82122.png">
+                    <!-- 메뉴 아이콘  제작자: Freepik - Flaticon-->
+                    <span>카테고리</span>
+                </button>
+                <ul id="topMenu">
+                    <li><a href="store.html">상점가자</a></li>
+                    <li><a href="itemBasket.html">장바구니</a></li>
+                    <li><a href="board.jsp">게시판</a></li>
+                    <li><a href="#">카테고리</a></li>
+                </ul>
+            </div>
+            <div class="nav_BtnGroup">
+                <span> <!-- 언제든지 개수와 수 변경 가능 -->
+                    <button class="nav_Btn" type="button">
+                        <a href="#">임시 버튼</a>
+                    </button>
+                    <button class="nav_Btn" type="button">
+                        <a href="#">임시 버튼</a>
+                    </button>
+                    <button class="nav_Btn" type="button">
+                        <a href="#">임시 버튼</a>
+                    </button>
+                    <button class="nav_Btn" type="button">
+                        <a href="#">임시 버튼</a>
+                    </button>
+                        </span>
+            </div>
+        </nav>
+    </header>
+    <main>메인 컨텐츠</main>
+</div>
+</div>
+
+<script src="/js/action.js"></script>
+<script>
+    var message = "[[${message}]]";
+    if(message != null) {
+        alert(message)
+    }
+</script>
+</body>
+
+</html>

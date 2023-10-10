@@ -10,6 +10,7 @@ public class UserDTO {
 	private String userEmail;
 	private String userPassword;
 	private String userName;
+	private String userBirth;
 	private String userPhone;
 	private String userPost;
 	private String userAddr;
@@ -52,6 +53,12 @@ public class UserDTO {
 	public void setUserPhone(String userPhone) {
 		this.userPhone = userPhone;
 	}
+	public String getUserBirth() {
+		return userBirth;
+	}
+	public void setUserBirth(String userBirth) {
+		this.userBirth = userBirth;
+	}
 	public String getUserPost() {
 		return userPost;
 	}
@@ -78,7 +85,7 @@ public class UserDTO {
 //	}
 	
 	public UserDTO(int inherenceIDuuID, String userID, String userEmail, String userPassword, String userName,
-			String userPhone, String userPost,String userAddr, String addr_detail) {
+			String userPhone, String userBirth, String userPost,String userAddr, String addr_detail) {
 		super();
 		this.inherenceIDuuID = inherenceIDuuID;
 		this.userID = userID;
@@ -86,6 +93,7 @@ public class UserDTO {
 		this.userPassword = userPassword;
 		this.userName = userName;
 		this.userPhone = userPhone;
+		this.userBirth = userBirth;
 		this.userPost = userPost;
 		this.userAddr = userAddr;
 		this.addr_detail = addr_detail;

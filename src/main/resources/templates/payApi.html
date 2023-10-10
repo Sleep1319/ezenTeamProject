@@ -1,21 +1,37 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>웅스토어</title>
-	<link rel="stylesheet" href="/css/main.css" >
+	<title>HCLY</title>
+	<link media="all" rel="stylesheet" th:href="@{/css/main.css}" type="text/css"/>
+	<link media="all" rel="stylesheet" th:href="@{/css/side_btn.css}" type="text/css"/>
+	<link rel="stylesheet" href="/css/pay.css">
 </head>
 <body>
-	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-	추후 체크박스 다중값 계산식 포함 필요
-	<br>
-	<!-- <form method="post" action="ItemServlet">
-		<input type="text" name="itemName" placeholder="웅이노트북, MySql설치  중 하나">
-		<button type="submit">품목 체크</button>
-	</form> -->
-	
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<div class="shell">
+	<div id="header">
+		<h1 id="logo"><a href="/"></a></h1>
+
+		<ul class="nav-menu-right">
+			<li th:if="${session.userID == null}"><a href="login.html">로그인</a></li>
+			<li th:if="${session.userID == null}"><a href="register.html">회원가입</a></li>
+			<li th:if="${session.userID != null}"><a th:text="'사용자: ' + ${session.userName}"></a></li>
+			<li th:if="${session.userID != null && !session.userID.equals('admin')}"><a href="mypage.html">마이페이지</a></li>
+			<li th:if="${session.userID != null && !session.userID.equals('admin')}"><a href="itemBasket.html">장바구니</a></li>
+			<li th:if="${session.userID != null && session.userID.equals('admin')}"><a href="management">상품관리</a></li>
+			<li th:if="${session.userID != null}"><a href="userLogout.html">로그아웃</a></li>
+			<li><a href="service_center">고객센터</a></li>
+		</ul>
+
+		<div class="nav-menu">
+			<a href="#"><img alt="남자" src="/css/images/man.jpg"></a>
+			<a href="#"><img alt="여자" src="/css/images/woman.jpg"></a>
+		</div>
+	</div>
+</div>
+	<div class="board-container">
 	<table border="1px">
 		<tr>
 			<td>상품이름</td>
@@ -30,30 +46,23 @@
 			<td th:text="${payItemType}"></td>
 		</tr>
 		<tr>
-			<td>상품개수</td>
-			<td th:text="${payBuyCount}"></td>
-		</tr>
-		<tr>
 			<td>최종가격</td>
 			<td th:text="${payTotalAmount}"></td>
 		</tr>
 	</table>
-	<br>
-    <button id="check_pay" type="button">테스트결제</button>
-	<% 
-	} 
-	%>
 
+    <button id="check_pay" type="button">테스트결제</button>
+	</div>
     <script>
 	//내부값 임포트로 수정 요망
         $("#check_pay").click(function () {
             var IMP = window.IMP;
-            IMP.init('imp87012411');//너꺼로
+            IMP.init('');//포트원 테스트 결제 들어가서 등록하고 가져온 키값을 대입하시오
 
             IMP.request_pay({
                 pg : 'kakaopay',
                 pay_method : 'card',
-                merchant_uid : "cheon_no12_" + [[${payItemID}]], //상점 관리 주문번호 크게 바꾸고 여기부터 아래
+                merchant_uid : "hcly_no12_" + [[${payItemID}]], //상점 관리 주문번호 정적이라 아이디 중복이 뜨니 값 수정 필요
                 name : '[[${payItemName}]]',
                 amount : [[${payItemAmount}]],
                 item_type : '[[${payItemType}]]'	,
@@ -64,71 +73,40 @@
                 buyer_postcode : '[[${session.userPost}]]' //바꾸기 여기부터 위
 
             }, function(rsp) {
-                if(rsp.success) {
-                    //1. 서버단에서 결제정보 조회를 위해 jq ajax로 imp_uid 전달하기
-                    jQuery.ajax({
-                        url : "./PayServlet", //CORS error 발생 주의
-                        type : 'post',
-                        dataType : 'json',
-                        data : {
-                            merchant_uid : rsp.merchant_uid,
-                            imp_uid : rsp.imp_uid,
-                            item_id : '<%= itemID %>',
-                            name : rsp.name,
-                            count : '<%= buyCount %>',
-                       		amount : rsp.amount,
-                            item_type : rsp.item_type,
-                            buyer_email : rsp.buyer_email,
-                            buyer_name : rsp.buyer_name,
-                            buyer_tel : rsp.buyer_tel,
-                            buyer_addr : rsp.buyer_addr,
-                            buyer_postcode : rsp.buyer_postcode
-                            //기타 등등 필요 데이터 추가
-                        },
-                        //결제 정보 등록 스프링 필요 잠시 대기
-                        success: function (data) {
-                            if (data.success) {
-                            	var msg = '결제가 완료되었습니다.';
-                                msg += '\n고유ID : ' + rsp.imp_uid;
-                                msg += '\n상점 거래 ID : ' + rsp.merchant_uid;
-                                msg += '\n결제 금액 : ' + rsp.paid_amount;
-                                msg += '카드 승인번호 : ' + rsp.apply_num;
-                                // 서버 응답 처리: 결제 성공
-                                alert(msg);
-                                location.href="index.jsp";
-                            } else {
-                                // 서버 응답 처리: 결제 실패
-                                alert("결제에 실패하였습니다.");
-                            }
-                        },
-                        error: function () {
-                            alert("서버 오류 발생");
-                        }
-                    });
-                    
-                /*    .done(function(data) {
-                        //2. 서버에서 REST API로 결제정보 확인 및 서비스 루틴이 정상적인 경우
-                        if(everythings_fine) {
-                            var msg = '결제가 완료되었습니다.';
-                            msg += '\n고유ID : ' + rsp.imp_uid;
-                            msg += '\n상점 거래 ID : ' + rsp.merchant_uid;
-                            msg += '\n결제 금액 : ' + rsp.paid_amount;
-                            msg += '카드 승인번호 : ' + rsp.apply_num;
+				if(rsp.success) {
+					//1. 서버단에서 결제정보 조회를 위해 jq ajax로 imp_uid 전달하기
+					jQuery.ajax({
+						url : "/paymeny/complete", //CORS error 발생 주의
+						type : 'post',
+						dataType : 'json',
+						data : {
+							imp_uid : rsp.imp_uid
+							//기타 등등 필요 데이터 추가
+						}
+					}).done(function(data) {
+						//2. 서버에서 REST API로 결제정보 확인 및 서비스 루틴이 정상적인 경우
+						if(everythings_fine) {
+							var msg = '결제가 완료되었습니다.';
+							msg += '\n고유ID : ' + rsp.imp_uid;
+							msg += '\n상점 거래 ID : ' + rsp.merchant_uid;
+							msg += '\n결제 금액 : ' + rsp.paid_amount;
+							msg += '카드 승인번호 : ' + rsp.apply_num;
 
-                            alert(msg);
-                        } else {
-                            //3. 아직 제대로 결제가 안된 경우
-                            //4. 결제된 금액이 요청한 금액과 달라 결제를 자동취소 처리 했을때
-                        }
-                    });*/
-                } else {
-                    var msg = '결제 실패했습니다.';
-                    msg += '에러내용 : ' + rsp.error_msg;
+							alert(msg);
+							location.href="main.html";
+						} else {
+							//3. 아직 제대로 결제가 안된 경우
+							//4. 결제된 금액이 요청한 금액과 달라 결제를 자동취소 처리 했을때
+						}
+					});
+				} else {
+					var msg = '결제 실패했습니다.';
+					msg += '에러내용 : ' + rsp.error_msg;
 
-                    alert(msg);
-                }
-            });
-        });
+					alert(msg);
+				}
+			});
+		});
 
     </script>
 </body>

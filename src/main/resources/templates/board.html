@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>HCLY</title>
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/board.css" />
+    <link rel="stylesheet" href="/css/font.css" />
+    <link media="all" rel="stylesheet" th:href="@{/css/main.css}" type="text/css" />
+    <link media="all" rel="stylesheet" th:href="@{/css/side_btn.css}" type="text/css" />
+
+</head>
+
+<body>
+<div class="shell">
+    <div id="header">
+        <h1 id="logo"><a href="/"></a></h1>
+        <ul class="nav-menu-right">
+            <li th:if="${session.userID == null}"><a href="login.html">로그인</a></li>
+            <li th:if="${session.userID == null}"><a href="register.html">회원가입</a></li>
+            <li th:if="${session.userID != null}"><a th:text="'사용자: ' + ${session.userName}"></a></li>
+            <li th:if="${session.userID != null && !session.userID.equals('admin')}"><a href="mypage.html">마이페이지</a>
+            </li>
+            <li th:if="${session.userID != null && !session.userID.equals('admin')}"><a
+                    href="itemBasket.html">장바구니</a></li>
+            <li th:if="${session.userID != null && session.userID.equals('admin')}"><a href="management">상품관리</a>
+            </li>
+            <li th:if="${session.userID != null}"><a href="userLogout.html">로그아웃</a></li>
+            <li><a href="service_center">고객센터</a></li>
+        </ul>
+
+        <div class="nav-menu">
+            <a href="#"><img alt="남자" src="/css/images/man.jpg"></a>
+            <a href="#"><img alt="여자" src="/css/images/woman.jpg"></a>
+        </div>
+    </div>
+</div>
+
+
+    <div class="board-container">
+        <form method="post" action="/boardUpdate">
+            <table>
+                <tr>
+                    <th>게시판 번호</th>
+                    <td><input type="text" name="boardID" id="boardID" th:value="${selectBoard.getBoardID()}" readonly></td>
+                </tr>
+                <tr>
+                    <th>작성자</th>
+                    <td><input type="text" name="userName" id="boardName" th:value="${selectBoard.getUserName()}" readonly></td>
+                </tr>
+                <tr>
+                    <th>게시일</th>
+                    <td><input type="text" name="boardTime" id="boardTime" th:value="${selectBoard.getBoardTime()}" readonly></td>
+                </tr>
+                <tr>
+                    <th>게시판 분류</th>
+                    <td><input type="text" name="boardDivide" class="boardUpdate" th:value="${selectBoard.getBoardDivide()}" readonly></td>
+                </tr>
+                <tr>
+                    <th>게시판 이름</th>
+                    <td><input type="text" name="boardName" class="boardUpdate" th:value="${selectBoard.getBoardName()}" readonly></td>
+                </tr>
+                <tr>
+                    <th>게시물 내용</th>
+                    <td><textarea name="boardContents" class="boardUpdate" readonly>[[${selectBoard.boardContents}]]</textarea></td>
+                </tr>
+            </table>
+            <div th:if="${inherenceID == selectBoard.getInherenceID() || session.userID.equals('admin')}">
+                <input type="button" class="btn" value="수정" onclick="chBoard()">
+                <input type="submit" class="hiddenBtn" value="확인" onclick="update('Insert')">
+                <input type="button" class="hiddenBtn" value="취소" onclick="location.reload()">
+            </div>
+        </form>
+        <div th:if="${inherenceID == selectBoard.getInherenceID() || session.userID.equals('admin')}">
+            <form method="get" action="boardDelete">
+                <input type="hidden" name="boardID" th:value="${selectBoard.getBoardID()}">
+                <input type="hidden" name="boardName" th:value="${selectBoard.getBoardName()}">
+                <input type="submit" class="removeBtn" value="삭제" style="margin-left: -10px;">
+            </form>
+        </div>
+    </div>
+
+
+<script src="/js/board.js"></script>
+<script>
+    var message = "[[${message}]]";
+    if (message && message.trim() !== "") {
+        alert(message);
+    }
+</script>
+</body>
+
+</html>

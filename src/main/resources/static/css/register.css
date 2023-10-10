@@ -1,0 +1,77 @@
+@charset "UTF-8";
+
+.user_area {
+    width: 100%;
+    padding-bottom: 100px;
+    display: flex;
+}
+
+.user_area_inner {
+    width: 1400px;
+    margin: 0 auto;
+}
+
+.user_area_inner h2 {
+    font-size: 26px;
+    letter-spacing: 0.08em;
+    font-weight: normal;
+    text-align: center;
+    padding: 90px 0 60px 0;
+}
+
+.user_area_inner form {
+    width: 400px;
+    margin: 0 auto;
+    border-radius: 15px;
+}
+
+.user_input_name,
+.user_input_id,
+.user_input_pwd{
+    width: 338px;
+    display: block;
+    padding: 15px;
+    border: 1px solid #222;
+    margin: 3px;
+}
+
+.user_input_email{
+    width: 338px;
+    padding: 15px;
+    border: 1px solid #222;
+    margin: 10px 0 20px 3px;
+}
+
+.user_input_pwd,
+.user_input_num,
+.user_input_add,
+.user_input_addDetail,
+.user_input_post {
+    width: 338px;
+    display: block;
+    padding: 15px;
+    border: 1px solid #222;
+    margin: 3px;
+}
+
+.btn_submit{
+    background-color: #222;
+    width: 184px;
+    height: 48px;
+    color: white;
+}
+
+.btn_reset{
+    background-color: #222;
+    width: 184px;
+    height: 48px;
+    color: white;
+}
+
+.btn_reset:hover{
+    cursor: pointer;
+}
+
+.btn_submit:hover{
+    cursor: pointer;
+}

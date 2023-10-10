@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+.all {
+    width: 1400px;
+    padding-bottom: 100px;
+    margin-top: 20px;
+}
+
+.boardName,
+.boardDivide {
+    font-family: 'NanumSquareNeo-Variable';
+    margin: 0 auto;
+    width: 368px;
+    display: block;
+    padding: 15px;
+    border: 1px solid #ddd;
+    margin-bottom: 5px;
+}
+
+.boardTime{
+    font-family: 'NanumSquareNeo-Variable';
+    display: block;
+    padding: 368px;
+    border: 1px solid #ddd;
+}
+
+.boardUpdate{
+    font-family: 'NanumSquareNeo-Variable';
+    margin: 0 auto;
+    display: block;
+    width: 395px;
+    height: 42px;
+    border: 1px solid #ddd
+}
+
+.btn_box{
+    width: 50%;
+    padding: auto;
+    margin: auto;
+    text-align: center;
+}
+
+.btn {
+    font-family: 'NanumSquareNeo-Variable';
+    color: #333;
+    padding: 15px 0;
+    background-color: #ebddcc;
+    border: 1px solid #ebddcc;
+    width: 400px;
+    margin-top:10px;
+}
+
+.btn:hover {
+    cursor: pointer;
+}

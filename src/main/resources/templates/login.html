@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인</title>
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+        <div class="container">
+            <section class="login_area">
+              <div class="login_area_inner">
+                <h2>로그인</h2>
+                <form method="post" action="/login">
+                  <fieldset>
+                    <legend>로그인 폼</legend>
+                    <input type="text" class="login_input_id" placeholder="ID" name="userID">
+                    <input type="password" class="login_input_pwd" placeholder="PWD" name="userPassword">
+                    <div class="find_area">
+                      <a href="find_id.html">아이디 찾기</a>
+                      <span>/</span>
+                      <a href="find_pwd.html">비밀번호 찾기</a>
+                    </div>
+                    <input type="submit" value="로그인" class="btn_login">
+                  </fieldset>
+                </form>
+                <div class="register_area">
+                  <p>
+                    아직 회원이 아니신가요?
+                    <br>
+                    고객님을 위한 다양한 혜택이 준비되어 있습니다.
+                  </p>
+                  <input type="submit" value="회원가입" class="btn_login1" onclick="location.href='register.html'">
+                </div>
+              </div>
+            </section>
+          </div>
+    </div>
+<script>
+    var message = "[[${message}]]";
+    if (message && message.trim() !== "") {
+        alert(message);
+    }
+</script>
+</body>
+</html>

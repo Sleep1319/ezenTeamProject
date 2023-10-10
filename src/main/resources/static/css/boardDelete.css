@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+.all {
+    width: 1400px;
+    padding-bottom: 100px;
+    margin-top: 20px;
+}
+
+.boardID,
+.boardName,
+.userPassword,
+.userID {
+    font-family: 'NanumSquareNeo-Variable';
+    margin: 0 auto;
+    width: 368px;
+    display: block;
+    padding: 15px;
+    border: 1px solid #ddd;
+    margin-bottom: 5px;
+}
+
+.btn_box{
+    width: 50%;
+    padding: auto;
+    margin: auto;
+    text-align: center;
+}
+
+.reset,
+.delete {
+    font-family: 'NanumSquareNeo-Variable';
+    color: #ffffff;
+    padding: 15px 0;
+    background-color: #333;
+    border: 1px solid #333;
+    width: 195px;
+    margin-top:10px;
+    margin-right: 10px;
+}
+
+.btn:hover {
+    cursor: pointer;
+}

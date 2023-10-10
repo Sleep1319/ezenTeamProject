@@ -37,17 +37,18 @@ public class BasketController {
 		if (session.getAttribute("userID") != null) {
 			userID = (String) session.getAttribute("userID");
 		}
+		String inherenceID = (String) session.getAttribute("inherenceID");
 
 
 		BasketDAO basketDAO = new BasketDAO();
 		ItemDAO itemDAO = new ItemDAO();
-		int result = basketDAO.upbasket(userID, itemID);
+		int result = basketDAO.upbasket(inherenceID, itemID);
 
 		if (result == -2) {
 			model.addAttribute("message", "DB에러");
 		} else if (result == -1) {
 			model.addAttribute("message", "등록 실패");
 		}
-		return "redirect:/itemBasket";
+		return "redirect:/itemBasket.html";
 	}
 }

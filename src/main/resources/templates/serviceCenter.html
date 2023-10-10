@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>HCLY</title>
+	<link rel="stylesheet" href="/css/reset.css" />
+	<link rel="stylesheet" href="/css/serviceCenter.css" />
+	<link rel="stylesheet" href="/css/font.css" />
+	<link media="all" rel="stylesheet" th:href="@{/css/main.css}" type="text/css" />
+	<link media="all" rel="stylesheet" th:href="@{/css/side_btn.css}" type="text/css" />
+</head>
+
+<body>
+<div class="shell">
+	<div id="header">
+		<h1 id="logo"><a href="/"></a></h1>
+
+		<ul class="nav-menu-right">
+			<li th:if="${session.userID == null}"><a href="login.html">로그인</a></li>
+			<li th:if="${session.userID == null}"><a href="register.html">회원가입</a></li>
+			<li th:if="${session.userID != null}"><a th:text="'사용자: ' + ${session.userName}"></a></li>
+			<li th:if="${session.userID != null && !session.userID.equals('admin')}"><a href="mypage.html">마이페이지</a>
+			</li>
+			<li th:if="${session.userID != null && !session.userID.equals('admin')}"><a
+					href="itemBasket.html">장바구니</a></li>
+			<li th:if="${session.userID != null && session.userID.equals('admin')}"><a href="management">상품관리</a>
+			</li>
+			<li th:if="${session.userID != null}"><a href="userLogout.html">로그아웃</a></li>
+			<li><a href="service_center">고객센터</a></li>
+		</ul>
+
+		<div class="nav-menu">
+			<a href="#"><img alt="남자" src="/css/images/man.jpg"></a>
+			<a href="#"><img alt="여자" src="/css/images/woman.jpg"></a>
+		</div>
+	</div>
+</div>
+<div class="all">
+	<a href="boardWrite">글작성</a>
+	<div th:if="${!boardList.isEmpty()}">
+		<table>
+			<tr>
+				<td>
+					게시번호
+				</td>
+				<td>
+					구분
+				</td>
+				<td>
+					글 제목
+				</td>
+				<td>
+					작성자
+				</td>
+				<td>
+					게시일
+				</td>
+			</tr>
+			<form th:each="board : ${boardList}" method="get" action="selectBoard">
+				<tr>
+					<td>
+						<input type="text" name="boardID" th:value="${board.getBoardID()}" readonly>
+					</td>
+					<td>
+						<input type="text" name="boardDivide" th:value="${board.getBoardDivide()}" readonly>
+					</td>
+					<td>
+						<input type="text" name="boardName" th:value="${board.getBoardName()}" readonly>
+					</td>
+					<td>
+						<input type="text" name="userName" th:value="${board.getUserName()}" readonly>
+					</td>
+					<td>
+						<input type="text" name="boardTime" th:value="${board.getBoardTime()}" readonly>
+					</td>
+					<td>
+						<input type="submit" value="글 이동">
+					</td>
+				</tr>
+			</form>
+		</table>
+	</div>
+</div>
+<div class="text" th:unless="${!boardList.isEmpty()}">
+	등록된 게시글이 없습니다
+</div>
+
+<script>
+	var message = "[[${message}]]";
+	if (message && message.trim() !== "") {
+		alert(message);
+	}
+</script>
+</body>
+
+</html>

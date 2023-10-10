@@ -1,0 +1,54 @@
+@charset "UTF-8";
+
+.user_area {
+    width: 1400px;
+    padding-bottom: 100px;
+    margin: 0 auto;
+}
+
+.user_area_inner {
+    width: 1200px;
+}
+
+.user_area_inner h2 {
+    font-size: 26px;
+    letter-spacing: 0.08em;
+    font-weight: normal;
+    text-align: center;
+    padding: 90px 0 60px 0;
+}
+
+.find_form form{
+    width: 700px;
+    padding: 10px 0 10px 0;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.user_input_name,
+.user_input_num {
+    margin: 0 auto;
+    width: 368px;
+    display: block;
+    padding: 15px;
+    border: 1px solid #ddd;
+    margin-bottom: 5px;
+}
+
+.user_input_num {
+    margin-bottom: 10px;
+}
+
+.btn_login {
+    display: inline-block;
+    color: #fff;
+    padding: 15px 0;
+    background-color: #222;
+    border: 1px solid #222;
+    width: 400px;
+    text-align: center;
+}
+
+.btn_login:hover {
+    cursor: pointer;
+}

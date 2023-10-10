@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+.all{
+    width: 1400px;
+    margin: 0 auto;
+    padding-bottom: 100px;
+    display: flex;
+    margin-top: 100px;
+    list-style: none;
+}
+
+table{
+    width: 1400px;
+    margin: 0 auto;
+    text-align: center;
+
+}
+
+tr{
+    margin-bottom: 2px;
+}
+
+th, td{
+    font-family: 'NanumSquareNeo-Variable';
+    padding: 5px;
+    text-align: center;
+}
+
+.text{
+    font-family: 'NanumSquareNeo-Variable';
+    font-size: 1.0em;
+    margin: 5PX;
+    text-align: center;
+}
