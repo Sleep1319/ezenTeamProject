@@ -1,78 +1,437 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org"> <!--타임리프를 쓰기위한 선언문 -->
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>웅스토어</title>
-    <link rel="stylesheet" href="/css/main.css" >
+    <title>HCLY</title>
+    <link media="all" rel="stylesheet" th:href="@{/css/main.css}" type="text/css"/>
+    <link media="all" rel="stylesheet" th:href="@{/css/side_btn.css}" type="text/css"/>
 </head>
-
 <body>
-<div id="container">
-    <div class="headImg"></div>
-    <header>
-        <div class="head_Se1">
-            <div class="top_logo">
-                <button type="button" id="top_LogoBtn"><a href="main.html">웅스토어</a></button>
-            </div>
-            <div class="top_Search">
-                <span> <input type="text" placeholder="검색어 입력" id="inputTypeText">
-                    <button type="submit" id="top_SearchBtn">
-                        <img id="searchIcon" src="/images/pngwing.com.png">
-                    </button>
-                </span>
-            </div>
-            <div id="userJoin">
-                <span>
-                <div th:if="${session.userID == null}">
-                    <a href="userLogin.html">로그인</a> <a href="userRegister.html">회원가입</a>
-                </div>
-                <div th:unless="${session.userID == null}">
-                    <a href="userInfo.html" id="userName" th:text="'사용자 ' + ${session.userName} +'님'"></a> <a href="userLogout.html">로그아웃</a>
-                </div>
-                <div th:if="${session.userID == 'admin'}">
-                    <a href="itemUp.jsp">상품관리</a>
-                </div>
-                <a href="serviceCenter.jsp">고객센터</a>
-                    </span>
-            </div>
+<div class="shell">
+    <div id="header">
+        <h1 id="logo"><a href="/"></a></h1>
+
+        <ul class="nav-menu-right">
+            <li th:if="${session.userID == null}"><a href="login.html">로그인</a></li>
+            <li th:if="${session.userID == null}"><a href="register.html">회원가입</a></li>
+            <li th:if="${session.userID != null}"><a th:text="'사용자: ' + ${session.userName}"></a></li>
+            <li th:if="${session.userID != null && !session.userID.equals('admin')}"><a href="mypage.html">마이페이지</a></li>
+            <li th:if="${session.userID != null && !session.userID.equals('admin')}"><a href="itemBasket.html">장바구니</a></li>
+            <li th:if="${session.userID != null && session.userID.equals('admin')}"><a href="management">상품관리</a></li>
+            <li th:if="${session.userID != null}"><a href="userLogout.html">로그아웃</a></li>
+            <li><a href="service_center">고객센터</a></li>
+        </ul>
+
+        <div class="nav-menu">
+            <a href="#"><img alt="남자" src="/css/images/man.jpg"></a>
+            <a href="#"><img alt="여자" src="/css/images/woman.jpg"></a>
         </div>
-        <nav>
-            <div class="nav_Category">
-                <button id="category_Btn" onclick="cate()" type="button">
-                    <img src="/images/free-icon-options-lines-82122.png">
-                    <!-- 메뉴 아이콘  제작자: Freepik - Flaticon-->
-                    <span>카테고리</span>
-                </button>
-                <ul id="topMenu">
-                    <li><a href="store.html">상점가자</a></li>
-                    <li><a href="itemBasket.html">장바구니</a></li>
-                    <li><a href="board.jsp">게시판</a></li>
-                    <li><a href="#">카테고리</a></li>
-                </ul>
-            </div>
-            <div class="nav_BtnGroup">
-                <span> <!-- 언제든지 개수와 수 변경 가능 -->
-                    <button class="nav_Btn" type="button">
-                        <a href="#">임시 버튼</a>
-                    </button>
-                    <button class="nav_Btn" type="button">
-                        <a href="#">임시 버튼</a>
-                    </button>
-                    <button class="nav_Btn" type="button">
-                        <a href="#">임시 버튼</a>
-                    </button>
-                    <button class="nav_Btn" type="button">
-                        <a href="#">임시 버튼</a>
-                    </button>
-                        </span>
-            </div>
-        </nav>
-    </header>
-    <main></main>
+    </div>
 </div>
 
-<script src="/js/action.js"></script>
+<div id="main">
+    <div class="cl">&nbsp;</div>
+    <div id="content">
+        <div id="main_banner">
+            <div id="holder">
+                <ul>
+                    <li><a href="#"><img alt="" src="/css/images/banner/mian_banner_1400_750.jpg"/></a></li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="side-full">
+            <div class="more-products">
+                <div class="more-products-holder">
+                    <ul>
+                        <li><a href="#"><img alt="" src="/css/images/small/94px (1).jpg"/></a></li>
+                        <li><a href="#"><img alt="" src="/css/images/small/94px (2).jpg"/></a></li>
+                        <li><a href="#"><img alt="" src="/css/images/small/94px (3).jpg"/></a></li>
+                        <li><a href="#"><img alt="" src="/css/images/small/94px (4).jpg"/></a></li>
+                        <li><a href="#"><img alt="" src="/css/images/small/94px (5).jpg"/></a></li>
+                        <li><a href="#"><img alt="" src="/css/images/small/94px (6).jpg"/></a></li>
+                        <li><a href="#"><img alt="" src="/css/images/small/94px (7).jpg"/></a></li>
+                        <li><a href="#"><img alt="" src="/css/images/small/94px (8).jpg"/></a></li>
+                        <li><a href="#"><img alt="" src="/css/images/small/94px (9).jpg"/></a></li>
+                        <li><a href="#"><img alt="" src="/css/images/small/94px (10).jpg"/></a></li>
+                        <li><a href="#"><img alt="" src="/css/images/small/94px (11).jpg"/></a></li>
+                        <li><a href="#"><img alt="" src="/css/images/small/94px (12).jpg"/></a></li>
+                        <li><a href="#"><img alt="" src="/css/images/small/94px (13).jpg"/></a></li>
+                        <li><a href="#"><img alt="" src="/css/images/small/94px (14).jpg"/></a></li>
+                        <li><a href="#"><img alt="" src="/css/images/small/94px (1).jpg"/></a></li>
+                        <li><a href="#"><img alt="" src="/css/images/small/94px (2).jpg"/></a></li>
+                        <li><a href="#"><img alt="" src="/css/images/small/94px (3).jpg"/></a></li>
+                        <li><a href="#"><img alt="" src="/css/images/small/94px (4).jpg"/></a></li>
+                        <li><a href="#"><img alt="" src="/css/images/small/94px (5).jpg"/></a></li>
+                        패션
+                        <li><a href="#"><img alt="" src="/css/images/small/94px (6).jpg"/></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="products">
+            <ul>
+                <li><a href="sang.html"><img alt="" src="/css/images/woman/woman_251_403_(1).jpg"/></a>
+                    <div class="product-info">
+                        <h3>엄청 이쁜 옷</h3>
+                        <div class="product-desc">
+                            <h4>남여공용</h4>
+                            <p>엄청 이쁜 옷 쩌는 스타일<br>
+                                소재</p>
+                            <strong class="price">가격</strong></div>
+                    </div>
+                </li>
+                <li><a href="sang.html"><img alt="" src="/css/images/woman/woman_251_403_(2).jpg"/></a>
+                    <div class="product-info">
+                        <h3>엄청 이쁜 옷</h3>
+                        <div class="product-desc">
+                            <h4>남여공용</h4>
+                            <p>엄청 이쁜 옷 쩌는 스타일<br>
+                                소재</p>
+                            <strong class="price">가격</strong></div>
+                    </div>
+                </li>
+                <li class="last"><a href="sang.html"><img alt="" src="/css/images/woman/woman_251_403_(3).jpg"/></a>
+                    <div class="product-info">
+                        <h3>엄청 이쁜 옷</h3>
+                        <div class="product-desc">
+                            <h4>남여공용</h4>
+                            <p>엄청 이쁜 옷 쩌는 스타일<br>
+                                소재</p>
+                            <strong class="price">가격</strong></div>
+                    </div>
+                </li>
+                <li class="last"><a href="sang.html"><img alt="" src="/css/images/woman/woman_251_403_(4).jpg"/></a>
+                    <div class="product-info">
+                        <h3>엄청 이쁜 옷</h3>
+                        <div class="product-desc">
+                            <h4>남여공용</h4>
+                            <p>엄청 이쁜 옷 쩌는 스타일<br>
+                                소재</p>
+                            <strong class="price">가격</strong></div>
+                    </div>
+                </li>
+                <li class="last"><a href="sang.html"><img alt="" src="/css/images/woman/woman_251_403_(5).jpg"/></a>
+                    <div class="product-info">
+                        <h3>엄청 이쁜 옷</h3>
+                        <div class="product-desc">
+                            <h4>남여공용</h4>
+                            <p>엄청 이쁜 옷 쩌는 스타일<br>
+                                소재</p>
+                            <strong class="price">가격</strong></div>
+                    </div>
+                </li>
+            </ul>
+
+
+        </div> <!--products-->
+
+
+        <div class="products">
+            <ul>
+                <li><a href="sang.html"><img alt="" src="/css/images/woman/woman_251_403_(6).jpg"/></a>
+                    <div class="product-info">
+                        <h3>엄청 이쁜 옷</h3>
+                        <div class="product-desc">
+                            <h4>남여공용</h4>
+                            <p>엄청 이쁜 옷 쩌는 스타일<br>
+                                소재</p>
+                            <strong class="price">가격</strong></div>
+                    </div>
+                </li>
+                <li><a href="sang.html"><img alt="" src="/css/images/woman/woman_251_403_(7).jpg"/></a>
+                    <div class="product-info">
+                        <h3>엄청 이쁜 옷</h3>
+                        <div class="product-desc">
+                            <h4>남여공용</h4>
+                            <p>엄청 이쁜 옷 쩌는 스타일<br>
+                                소재</p>
+                            <strong class="price">가격</strong></div>
+                    </div>
+                </li>
+                <li class="last"><a href="sang.html"><img alt="" src="/css/images/woman/woman_251_403_(8).jpg"/></a>
+                    <div class="product-info">
+                        <h3>엄청 이쁜 옷</h3>
+                        <div class="product-desc">
+                            <h4>남여공용</h4>
+                            <p>엄청 이쁜 옷 쩌는 스타일<br>
+                                소재</p>
+                            <strong class="price">가격</strong></div>
+                    </div>
+                </li>
+                <li class="last"><a href="sang.html"><img alt="" src="/css/images/woman/woman_251_403_(9).jpg"/></a>
+                    <div class="product-info">
+                        <h3>엄청 이쁜 옷</h3>
+                        <div class="product-desc">
+                            <h4>남여공용</h4>
+                            <p>엄청 이쁜 옷 쩌는 스타일<br>
+                                소재</p>
+                            <strong class="price">가격</strong></div>
+                    </div>
+                </li>
+                <li class="last"><a href="sang.html"><img alt="" src="/css/images/woman/woman_251_403_(10).jpg"/></a>
+                    <div class="product-info">
+                        <h3>엄청 이쁜 옷</h3>
+                        <div class="product-desc">
+                            <h4>남여공용</h4>
+                            <p>엄청 이쁜 옷 쩌는 스타일<br>
+                                소재</p>
+                            <strong class="price">가격</strong></div>
+                    </div>
+                </li>
+            </ul>
+        </div> <!--products-->
+
+        <div class="products">
+            <ul>
+                <li><a href="sang.html"><img alt="" src="/css/images/woman/woman_251_403_(11).jpg"/></a>
+                    <div class="product-info">
+                        <h3>엄청 이쁜 옷</h3>
+                        <div class="product-desc">
+                            <h4>남여공용</h4>
+                            <p>엄청 이쁜 옷 쩌는 스타일<br>
+                                소재</p>
+                            <strong class="price">가격</strong></div>
+                    </div>
+                </li>
+                <li><a href="sang.html"><img alt="" src="/css/images/woman/woman_251_403_(12).jpg"/></a>
+                    <div class="product-info">
+                        <h3>엄청 이쁜 옷</h3>
+                        <div class="product-desc">
+                            <h4>남여공용</h4>
+                            <p>엄청 이쁜 옷 쩌는 스타일<br>
+                                소재</p>
+                            <strong class="price">가격</strong></div>
+                    </div>
+                </li>
+                <li class="last"><a href="sang.html"><img alt="" src="/css/images/woman/woman_251_403_(13).jpg"/></a>
+                    <div class="product-info">
+                        <h3>엄청 이쁜 옷</h3>
+                        <div class="product-desc">
+                            <h4>남여공용</h4>
+                            <p>엄청 이쁜 옷 쩌는 스타일<br>
+                                소재</p>
+                            <strong class="price">가격</strong></div>
+                    </div>
+                </li>
+                <li class="last"><a href="sang.html"><img alt="" src="/css/images/woman/woman_251_403_(14).jpg"/></a>
+                    <div class="product-info">
+                        <h3>엄청 이쁜 옷</h3>
+                        <div class="product-desc">
+                            <h4>남여공용</h4>
+                            <p>엄청 이쁜 옷 쩌는 스타일<br>
+                                소재</p>
+                            <strong class="price">가격</strong></div>
+                    </div>
+                </li>
+                <li class="last"><a href="sang.html"><img alt="" src="/css/images/woman/woman_251_403_(15).jpg"/></a>
+                    <div class="product-info">
+                        <h3>엄청 이쁜 옷</h3>
+                        <div class="product-desc">
+                            <h4>남여공용</h4>
+                            <p>엄청 이쁜 옷 쩌는 스타일<br>
+                                소재</p>
+                            <strong class="price">가격</strong></div>
+                    </div>
+                </li>
+            </ul>
+        </div> <!--products-->
+
+        <div class="products">
+            <ul>
+                <li><a href="sang.html"><img alt="" src="/css/images/woman/woman_251_403_(16).jpg"/></a>
+                    <div class="product-info">
+                        <h3>엄청 이쁜 옷</h3>
+                        <div class="product-desc">
+                            <h4>남여공용</h4>
+                            <p>엄청 이쁜 옷 쩌는 스타일<br>
+                                소재</p>
+                            <strong class="price">가격</strong></div>
+                    </div>
+                </li>
+                <li><a href="sang.html"><img alt="" src="/css/images/woman/woman_251_403_(17).jpg"/></a>
+                    <div class="product-info">
+                        <h3>엄청 이쁜 옷</h3>
+                        <div class="product-desc">
+                            <h4>남여공용</h4>
+                            <p>엄청 이쁜 옷 쩌는 스타일<br>
+                                소재</p>
+                            <strong class="price">가격</strong></div>
+                    </div>
+                </li>
+                <li class="last"><a href="sang.html"><img alt="" src="/css/images/woman/woman_251_403_(18).jpg"/></a>
+                    <div class="product-info">
+                        <h3>엄청 이쁜 옷</h3>
+                        <div class="product-desc">
+                            <h4>남여공용</h4>
+                            <p>엄청 이쁜 옷 쩌는 스타일<br>
+                                소재</p>
+                            <strong class="price">가격</strong></div>
+                    </div>
+                </li>
+                <li class="last"><a href="sang.html"><img alt="" src="/css/images/woman/woman_251_403_(19).jpg"/></a>
+                    <div class="product-info">
+                        <h3>엄청 이쁜 옷</h3>
+                        <div class="product-desc">
+                            <h4>남여공용</h4>
+                            <p>엄청 이쁜 옷 쩌는 스타일<br>
+                                소재</p>
+                            <strong class="price">가격</strong></div>
+                    </div>
+                </li>
+                <li class="last"><a href="sang.html"><img alt="" src="/css/images/woman/woman_251_403_(20).jpg"/></a>
+                    <div class="product-info">
+                        <h3>엄청 이쁜 옷</h3>
+                        <div class="product-desc">
+                            <h4>남여공용</h4>
+                            <p>엄청 이쁜 옷 쩌는 스타일<br>
+                                소재</p>
+                            <strong class="price">가격</strong></div>
+                    </div>
+                </li>
+            </ul>
+        </div> <!--products-->
+
+
+    </div>
+
+</div> <!--메인-->
+
+
+<div id="footer-r">
+    <div class="footer-top">
+        <div>
+            <div>
+                <p class="footer-subtitle">DELIVERY</p>
+                <p>교환/반품주소지 :</p>
+                <p>천웅 집</p>
+            </div>
+            <div>
+                <p class="footer-subtitle">고객센터</p>
+                <div class="fast" style="cursor: pointer;"> <!-- 상담 API 기능 (유료ㅠㅠ)/마우스 오버시 마우스포인트 모양-->
+                    <span class="mainicon kakaotalk"></span> <!--버튼용-->
+                    <span class="name">010-123-1234</span>
+                </div>
+                <div class="fast" style='cursor: pointer;'> <!-- 상담 API 기능 (유료ㅠㅠ)/마우스 오버시 마우스포인트 모양 -->
+                    <span class="mainicon navertalk"></span> <!--버튼용 -->
+                    <span class="name">02-1234-1234</span>
+                </div>
+                <p style="color:#525252; margin-top:15px;">상담 가능 시간 </p>
+                <p>평일 : 09시 ~ 18시 &nbsp;&nbsp;&nbsp; 점심시간 : 12 ~ 13시 </p>
+                <p style="margin: 11px auto;">(응 주말 공휴일 휴무야~)</p>
+            </div>
+        </div>
+        <div>
+            <div>
+                <p class="footer-subtitle" onclick="location.href='/board/list.php?boardid=csnotice'"
+                   style="cursor:pointer;">NOTICE +</p>
+
+                <p><a href="">- 공지 안내문_01 </a></p>
+                <p><a href="">- 공지 안내문_02 </a></p>
+                <p><a href="">- 공지 안내문_03 </a></p>
+
+            </div>
+            <div>
+                <p class="footer-subtitle">ABOUT ♥ HCLY ♥</p>
+                <p>HCLY 쇼핑몰</p>
+                <p>대표 : 천웅 | 전화 : 1234-4567 | 팩스 : 02)7654-4321</p>
+                <p>주소 : 사랑시 고백구 행복동~ </p>
+                <p>사업자등록번호 : 123-12-12345</p>
+                <p>책임자 : 한동훈,천웅,이지수,윤소리 </p>
+                <p>제휴,협찬,유통 문의 : <span style="color:black;">이메일주소@</span></p>
+            </div>
+            <div style="color:#c8c8c8; margin-top:19px;">
+                ========== 멘트 ==========
+            </div>
+        </div>
+        <div>
+            <div>
+                <p class="footer-subtitle">쇼핑몰 장점</p>
+                <p> 옷이 이뻐요~ </p>
+                <p> 옷이 저렴해요~ </p>
+                <p> 배송이 빨라요~ </p>
+                <p><img src="img/bottom_01.jpg"></p>
+            </div>
+            <div style="margin:30px 0;">
+                <a href="javascript:" style="cursor:default"> </a>
+            </div>
+            <div>
+                <p></p> <!--예비용-->
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="bottomwrap">
+            <div class="navbtn">
+                <ul class="footer_ul">
+                    <li><a href=" 파일명 ">이용안내</a></li>
+                    <li><a href=" 파일명 ">이용약관</a></li>
+                    <li><a href=" 파일명 ">개인정보처리방침</a></li>
+                    <li><a href=" 파일명 ">파트너쉽</a></li>
+                    <li><a href=" 파일명 ">멤버쉽</a></li>
+                    <li><a href=" 웹페이지 모바일용 ">모바일버전</a></li>
+                    <!-- <li> 다크모드 </li>  어우 ,, -->
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <div class="btn_quick">
+        <ul class="btn_qucik_wrap">
+            <li>
+                <a alt="ABC" href="">
+                    <img alt="" class="ABC" src="/css/images/Button/Button_ (1).jpg">
+                </a>
+                <div class="hovertxt"><span>검색 </span></div>
+            </li>
+            <li class="">
+                <a href="" onclick="">
+                    <img alt="" class="" src="/css/images/Button/Button_ (2).jpg">
+                </a>
+                <div id="" style="display:none;"> <!--닫기 아이콘 제거를 위해-->
+                    <ul class="">
+                        <li class="pickClose" onclick="" style="border:0;">
+                            <img alt="" src="/css/images/Button/x_close.png">
+                        </li>
+                    </ul>
+                </div>
+                <div class="hovertxt"><span>마이페이지</span></div>
+            </li>
+            <li>
+                <a class="naver" href="javascript:" onclick="window.open('ㅁㅁㅁㅁㅁ');return false;"
+                   target="_blank"><img alt="네이버톡" class="Q_button" src="/css/images/Button/Button_ (3).jpg"></a>
+            </li>
+            <li>
+                <a class="kakao" href="javascript:" onclick="window.open('ㅁㅁㅁㅁㅁ');"><img
+                        alt="카카오톡" class="Q_button" src="/css/images/Button/Button_ (4).jpg"></a>
+            </li>
+            <li>
+                <a class="up" onclick="scrollup()"><img alt="위로" class="Q_button"
+                                                        src="/css/images/Button/Arrow (1).jpg" style='cursor: pointer;'></a>
+                <div class="hovertxt"></div>
+            </li>
+            <li>
+                <a class="down" onclick="scrolldown()"><img alt="아래로" class="Q_button"
+                                                            src="/css/images/Button/Arrow (1).jpg"
+                                                            style='cursor: pointer; transform:rotate(180deg) translateX(-2px);'></a>
+                <div class="hovertxt"></div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<script src="/js/side_btn.js"></script>
+
+<script>
+    var message = "[[${message}]]";
+    if (message && message.trim() !== "") {
+        alert(message);
+    }
+</script>
 </body>
+
 
 </html>
