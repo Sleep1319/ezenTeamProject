@@ -13,6 +13,14 @@
 <img src="https://img.shields.io/badge/mysql-4479A1?style=flat&logo=mysql&logoColor=white"/>
 <br>
 추가 의존성:  web, thymeleaf, jpa, h2, lombok, validation
+<br>
+<p>주의사항!<br>
+	src/main/resources/application.yml<br> 
+	src/main/java/util/DatabaseUtil<br>
+	위 두개의 Mysql계정정보 추가 필요<br>
+	src/main/resources/templates/payApi.html<br>
+	60번 자스 구문 포트원 키값 등록 필요
+</p>
 Mysql 코드:<br>
 <pre>
   # 순서대로 실행 하시오
