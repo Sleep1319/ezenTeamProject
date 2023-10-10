@@ -1,14 +1,14 @@
 server:
   port: 8081
 
-# database
+# database ?? ??
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/TeamProject?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-    username:
+    username: 
     password: 
-# 본인 mysql 아이디 비번 입력
+#본인 MySql 아이디 비번 입력
 
   jpa:
     database: mysql
