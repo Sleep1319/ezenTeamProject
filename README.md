@@ -1,7 +1,7 @@
 # ezenTeamProject
 활용 언어: 
-<img src="https://img.shields.io/badge/spring-6DB33F?style=flat&logo=spring&logoColor=white"/>
-<img src="https://img.shields.io/badge/javascript-F7DF1E?style=flat&logo=javascript-&logoColor=white"/>
+<img src="https://img.shields.io/badge/Java-FF7800?style=flat&logo=Java&logoColor=white"/>
+<img src="https://img.shields.io/badge/Javascript-F7DF1E?style=flat&logo=Javascript-&logoColor=white"/>
 <img src="https://img.shields.io/badge/css3-1572B6?style=flat&logo=css&logoColor=white"/>
 <img src="https://img.shields.io/badge/html5-E34F26?style=flat&logo=html5&logoColor=white"/>
 <br>
@@ -9,7 +9,10 @@
 <img src="https://img.shields.io/badge/eclipseide-2C2255?style=flat&logo=eclipseide&logoColor=white"/>
 <img src="https://img.shields.io/badge/visualstudiocode-007ACC?style=flat&logo=visualstudiocode&logoColor=white"/>
 <img src="https://img.shields.io/badge/intellijidea-000000?style=flat&logo=intellijidea&logoColor=white"/>
-추가 의존성: 
+<img src="https://img.shields.io/badge/springboot-6DB33F?style=flat&logo=springboot&logoColor=white"/>
+<img src="https://img.shields.io/badge/mysql-4479A1?style=flat&logo=mysql&logoColor=white"/>
+<br>
+추가 의존성:  web, thymeleaf, jpa, h2, lombok, validation
 Mysql 코드:<br>
 <pre>
   # 순서대로 실행 하시오
