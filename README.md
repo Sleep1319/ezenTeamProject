@@ -21,7 +21,7 @@
 	src/main/resources/templates/payApi.html<br>
 	60번 자스 구문 포트원 키값 등록 필요<br>
 	결제 구현은 api지식 한계상 결제 까지만 구현<br>
-	버그나 부족한점은 추후 업데이트 하겠음
+	
 </p>
 Mysql 코드:<br>
 <pre>
