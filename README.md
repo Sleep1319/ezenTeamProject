@@ -14,6 +14,7 @@
 <br>
 추가 의존성:  web, thymeleaf, jpa, h2, lombok, validation
 <br>
+개발기간: 23.09.18 ~ 23.09.29
 <p>주의사항!<br>
 	src/main/resources/application.yml<br> 
 	src/main/java/util/DatabaseUtil<br>
